@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slither Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-wrap">
+    
+    <div id="playArea"></div>
+
+    
+    <aside class="hud">
+      <div class="hud__row">
+        <span>Score</span><strong id="scorebox">0</strong>
+      </div>
+      <div class="hud__row">
+        <span>Hiscore</span><strong id="hiscorebox">0</strong>
+      </div>
+      <div class="hud__actions">
+        <button id="btnPause" type="button" aria-pressed="false">Pause</button>
+        <button id="btnRestart" type="button">Restart</button>
+      </div>
+    </aside>
+
+   
+    <div id="overlay" hidden>
+      <div class="panel">
+        <h2 id="overlayTitle">Game Over</h2>
+        <p id="overlayMsg">Press Space or click below to play again</p>
+        <button id="overlayBtn" type="button">Play again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>

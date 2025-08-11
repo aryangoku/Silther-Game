@@ -1,0 +1,110 @@
+:root{
+  --cells: 18;
+  --board-w: min(92vmin, 720px);
+  --bg-1:#93f993; --bg-2:#f9f98e;
+  --ui:#111; --shadow:rgba(0,0,0,.25);
+  --border:#1f2937;
+  --snake:#7c3aed; --head:#ef4444; --food:#facc15;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  display:grid;place-items:center;
+  background:
+    radial-gradient(100% 100% at 0% 0%, rgba(255,255,255,.08), transparent 60%),
+    radial-gradient(100% 100% at 100% 100%, rgba(0,0,0,.12), transparent 60%),
+    url("./bg.jpg") center/cover no-repeat fixed;
+  font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ui);
+}
+
+.game-wrap{
+  position:relative;
+  width:calc(var(--board-w) + 260px);   /* room for HUD */
+  max-width:95vw;
+}
+
+/* Board */
+#playArea{
+  position: relative;                 /* <-- add this */
+  width:var(--board-w);
+  aspect-ratio:1/1;
+  background: linear-gradient(var(--bg-1), var(--bg-2));
+  border:2px solid var(--border);
+  border-radius:14px;
+  box-shadow:0 12px 30px var(--shadow);
+  display:grid;
+  grid-template: repeat(var(--cells),1fr)/repeat(var(--cells),1fr);
+  overflow:hidden;
+}
+
+/* grid overlay */
+#playArea::before{
+  content:"";
+  position:absolute;
+  inset:0;                             /* lock to the board edges */
+  border-radius:inherit;
+  pointer-events:none;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.06) 1px, transparent 1px);
+  background-size: calc(100%/var(--cells)) calc(100%/var(--cells));
+}
+
+/* Entities (keep your classes) */
+.snake,.head,.food{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.18)}
+.snake{background:var(--snake)}
+.head{background:var(--head);transform:scale(1.03)}
+.food{background:var(--food)}
+
+/* HUD */
+.hud{
+  position:absolute; inset:auto 0 0 auto;  /* attaches to right of board */
+  left: calc(var(--board-w) + 24px);
+  top: 24px;
+  width: 220px;
+  display:flex; flex-direction:column; gap:12px;
+  padding:14px 16px;
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(17,24,39,.15);
+  border-radius:12px;
+  box-shadow:0 8px 20px var(--shadow);
+}
+.hud__row{display:flex;justify-content:space-between;align-items:center}
+.hud__row span{font-weight:700;font-size:clamp(14px,2.1vmin,18px)}
+.hud__row strong{font-weight:900;font-size:clamp(18px,3vmin,26px)}
+.hud__actions{display:flex;gap:8px;margin-top:6px}
+.hud__actions button{
+  cursor:pointer;border:1px solid rgba(0,0,0,.15);border-radius:10px;
+  padding:8px 10px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+
+
+#overlay[hidden]{display:none}
+#overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.28);
+  display:grid;place-items:center;
+}
+#overlay .panel{
+  background:#ffffffd9;border:1px solid rgba(0,0,0,.14);
+  border-radius:16px;padding:22px 24px;text-align:center;
+  box-shadow:0 18px 40px var(--shadow);max-width: min(420px, 90vw);
+}
+#overlay h2{font-size:clamp(22px,5.5vmin,36px);margin-bottom:6px}
+#overlay p{margin-bottom:14px}
+#overlay button{
+  padding:10px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.15);background:#fff;cursor:pointer;
+}
+
+/* Mobile: put HUD under board */
+@media (max-width: 900px){
+  .game-wrap{width:min(96vw, var(--board-w));}
+  .hud{position:static; width:auto; margin:12px 0 0; left:auto; top:auto}
+}
+
+/* Motion preference */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+}
