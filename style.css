@@ -52,6 +52,14 @@ body{
   background-size: calc(100%/var(--cells)) calc(100%/var(--cells));
 }
 
+.game-wrap.overlay-active #playArea{
+  filter: blur(8px) saturate(.9);
+  transition: filter .2s ease;
+}
+
+/* overlay already covers the board; just be sure it’s above */
+#overlay{ z-index: 5; }
+
 /* Entities (keep your classes) */
 .snake,.head,.food{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.18)}
 .snake{background:var(--snake)}
