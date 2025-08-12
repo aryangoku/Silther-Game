@@ -8,7 +8,11 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
+html,body{
+  height:100%;
+  overscroll-behavior: contain;
+}
+
 body{
   display:grid;place-items:center;
   background:
@@ -56,17 +60,17 @@ body{
   filter: blur(8px) saturate(.9);
   transition: filter .2s ease;
 }
+#playArea { touch-action: none; }
 
-/* overlay already covers the board; just be sure it’s above */
 #overlay{ z-index: 5; }
 
-/* Entities (keep your classes) */
+
 .snake,.head,.food{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.18)}
 .snake{background:var(--snake)}
 .head{background:var(--head);transform:scale(1.03)}
 .food{background:var(--food)}
 
-/* HUD */
+
 .hud{
   position:absolute; inset:auto 0 0 auto;  /* attaches to right of board */
   left: calc(var(--board-w) + 24px);
@@ -115,4 +119,22 @@ body{
 /* Motion preference */
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important; transition:none !important}
+}
+
+.mobile-controls{
+  display:none;
+  position:relative;
+  width:220px; margin:12px auto 0;
+  user-select:none;
+}
+.mobile-controls button{
+  font-size:22px; padding:12px 14px;
+  border-radius:12px; border:1px solid rgba(0,0,0,.15);
+  background:#fff; box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+.mobile-controls .mid{ display:flex; justify-content:space-between; margin:10px 0; }
+
+@media (max-width: 900px){
+  .mobile-controls{ display:block; }
+  .hud{ position:static; width:auto; margin-top:10px; }
 }
