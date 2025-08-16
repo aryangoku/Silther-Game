@@ -2,43 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Slither Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="game-wrap overlay-active">
-    <div id="playArea"></div>
-
-    
-    <aside class="hud">
-      <div class="hud__row">
-        <span>Score</span><strong id="scorebox">0</strong>
-      </div>
-      <div class="hud__row">
-        <span>Hiscore</span><strong id="hiscorebox">0</strong>
-      </div>
+    <!-- Top HUD (mobile-friendly) -->
+    <header class="hud">
+      <div class="hud__pair"><span>Score:</span><strong id="scorebox">0</strong></div>
+      <div class="hud__pair"><span>Hiscore:</span><strong id="hiscorebox">0</strong></div>
       <div class="hud__actions">
         <button id="btnPause" type="button" aria-pressed="false">Pause</button>
         <button id="btnRestart" type="button">Restart</button>
       </div>
-    </aside>
-      <div class="mobile-controls" aria-label="Controls">
-        <button id="btnUp"    aria-label="Up">▲</button>
-        <div class="mid">
-          <button id="btnLeft"  aria-label="Left">◀</button>
-          <button id="btnRight" aria-label="Right">▶</button>
-        </div>
-        <button id="btnDown"  aria-label="Down">▼</button>
-        </div>
+    </header>
 
-    
+    <!-- Game board -->
+    <main class="board-wrap">
+      <div id="playArea"></div>
+    </main>
+
+    <!-- Mobile controls -->
+    <nav class="mobile-controls" aria-label="Controls">
+      <button id="btnUp" aria-label="Up">▲</button>
+      <div class="mid">
+        <button id="btnLeft" aria-label="Left">◀</button>
+        <button id="btnRight" aria-label="Right">▶</button>
+      </div>
+      <button id="btnDown" aria-label="Down">▼</button>
+    </nav>
+
+    <!-- Overlay -->
     <div id="overlay">
       <div class="panel">
         <h2 id="overlayTitle">Ready?</h2>
-        <p id="overlayMsg">Press any arrow key or click Play to start</p>
-        <div style="display:flex; gap:8px; justify-content:center;">
+        <p id="overlayMsg">Press any arrow key or tap Play to start</p>
+        <div class="overlay-actions">
           <button id="overlayPlay" type="button">Play</button>
           <button id="overlayBtn" type="button" style="display:none;">Play again</button>
         </div>
